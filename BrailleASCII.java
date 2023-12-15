@@ -1,14 +1,14 @@
 /**
- * Gabriela Roznawska
- * CSC207
- * 12/15/2023
- * The program takes two command-line parameters, the first of which represents the target character
- * set and the second of which represents the source characters, and that translates the text. 
+ * Gabriela Roznawska 
+ * CSC207 
+ * 12/15/2023 
+ * The program takes two command-line parameters, the first of
+ * which represents the target character set and the second of which represents the source
+ * characters, and that translates the text.
  * 
  * Acknowledgements: Used this website: https://www.programiz.com/java-programming/inputstream to
  * find out how to manage inputstream. Also used Java documentation for Scanner, Character, Integer
- * Character Array, String.
- * Furthermore I used generous help of prof. Rebelsky
+ * Character Array, String. Furthermore I used generous help of prof. Rebelsky
  */
 
 import java.io.File;
@@ -17,10 +17,9 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 
 /**
- * BrailleASCII
- * Takes two command-line parameters, the first of which represents the target character 
- * set and the second of which represents the source characters, and that translates the text. 
- * Prints out the "translations"
+ * BrailleASCII Takes two command-line parameters, the first of which represents the target
+ * character set and the second of which represents the source characters, and that translates the
+ * text. Prints out the "translations"
  */
 public class BrailleASCII {
   public static void main(String[] args) throws Exception {

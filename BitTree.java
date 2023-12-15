@@ -1,3 +1,17 @@
+/**
+ * Gabriela Roznawska 
+ * CSC207 
+ * 12/15/2023
+ *
+ * This file contains all methods that create a BitTree. It stores mappings from bits to values. Is
+ * essentail base for the remaining parts of the project.
+ * 
+ * Acknowledgements: Advice and help of prof. Rebeslky; CSC207 instructions for the MP8; Java
+ * Documentation.
+ * 
+ */
+
+
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -23,21 +37,22 @@ public class BitTree {
       this.n = n;
       this.root = new BitTreeNode();
       this.leaf = new BitTreeLeaf();
-      this.sequence = new String [100];
+      this.sequence = new String[100];
       this.index = 0;
     } // if
   } // BitTree(int)
 
   /**
    * Sets a value at a location in a tree provided by bits
+   * 
    * @param bits a string of binary encoding letters
    * @param value the string with a character at a given bit address
    * @throws Exception for incorrect length
    */
   public void set(String bits, String value) throws Exception {
     BitTreeNode current = this.root;
-    if (bits.length() != n){
-      throw new Exception ("Incorrect length exception");
+    if (bits.length() != n) {
+      throw new Exception("Incorrect length exception");
     } // if
 
     this.sequence[index++] = bits;
@@ -60,32 +75,33 @@ public class BitTree {
       if (current.left == null) {
         current.left = new BitTreeLeaf(value);
       } else if (current.left != null) {
-        ((BitTreeLeaf)current.left).value = value;
+        ((BitTreeLeaf) current.left).value = value;
       } // else if
     } // if
     if (bits.charAt(0) == '1') {
       if (current.right == null) {
         current.right = new BitTreeLeaf(value);
       } else if (current.right != null) {
-        ((BitTreeLeaf)current.right).value = value;
+        ((BitTreeLeaf) current.right).value = value;
       } // else if
     } // if
     return;
   } // set(String, String)
 
   /**
-   * Follows the path through the tree given by bits (adding nodes as appropriate) 
-   * and adds or replaces the value at the end
+   * Follows the path through the tree given by bits (adding nodes as appropriate) and adds or
+   * replaces the value at the end
+   * 
    * @param bits a string of binary encoding letters
    * @param value the string with a character at a given bit address
    * @throws Exception for incorrect length
    */
   public String get(String bits) throws Exception {
-    //follows the pat hlike set but then only returns the leaf
-    //incorrect length is either 6,7,8
+    // follows the pat hlike set but then only returns the leaf
+    // incorrect length is either 6,7,8
     BitTreeNode current = this.root;
-    if (bits.length() != n){
-      throw new Exception ("Incorrect length exception");
+    if (bits.length() != n) {
+      throw new Exception("Incorrect length exception");
     } // if
     while (bits.length() != 1) {
       if (bits.charAt(0) == '0') {
@@ -96,7 +112,7 @@ public class BitTree {
         bits = bits.substring(1);
       } else if (bits.charAt(0) == '1') {
         if (current.right == null) {
-           throw new Exception("Cannot get down the tree if current.right is null");
+          throw new Exception("Cannot get down the tree if current.right is null");
         } // if
         current = current.right;
         bits = bits.substring(1);
@@ -104,44 +120,46 @@ public class BitTree {
     } // while
     if (bits.charAt(0) == '0') {
       if (current.left == null) {
-          throw new Exception("No such path exception");
-        } else if (current.left != null) {
-        return ((BitTreeLeaf)current.left).value;
+        throw new Exception("No such path exception");
+      } else if (current.left != null) {
+        return ((BitTreeLeaf) current.left).value;
       } // else if
     } // if
     if (bits.charAt(0) == '1') {
-       if (current.right == null) {
-         throw new Exception("No such path exception");
-        } else if (current.right != null) {
-        return ((BitTreeLeaf)current.right).value;
+      if (current.right == null) {
+        throw new Exception("No such path exception");
+      } else if (current.right != null) {
+        return ((BitTreeLeaf) current.right).value;
       } // else if
     } // if
     return "";
   } // get(String)
 
-/**
- * prints all the leaves
- * @param tree a tree
- * @param pen penwriter pen
- */
-  public void print(BitTreeNode tree, PrintWriter pen){
-    if (tree == null){
+  /**
+   * prints all the leaves
+   * 
+   * @param tree a tree
+   * @param pen penwriter pen
+   */
+  public void print(BitTreeNode tree, PrintWriter pen) {
+    if (tree == null) {
       return;
-    } else if(tree instanceof BitTreeLeaf){
-      pen.print(((BitTreeLeaf)tree).value);
-    } else{
+    } else if (tree instanceof BitTreeLeaf) {
+      pen.print(((BitTreeLeaf) tree).value);
+    } else {
       print(tree.left, pen);
       print(tree.right, pen);
     } // if
   } // print(BitTreeNode, PenWriter)
 
   /**
-   *  Prints out the contents of the tree in CSV format
+   * Prints out the contents of the tree in CSV format
+   * 
    * @param source inputstream
    * @throws Exception for wrong length of input
    */
   public void dump(PrintWriter pen) throws Exception {
-    for(int i = 0; this.sequence[i] != null; i++){
+    for (int i = 0; this.sequence[i] != null; i++) {
       String str = get(this.sequence[i]);
       pen.println(this.sequence[i] + "," + str);
     } // for
@@ -149,6 +167,7 @@ public class BitTree {
 
   /**
    * Reads a series of lines of the form bits,value and stores them in the tree.
+   * 
    * @param source inputstream
    * @throws Exception for wrong length of input
    */
@@ -156,13 +175,13 @@ public class BitTree {
     Scanner scan = new Scanner(source);
     String tempBits = "";
     String tempValue = "";
-    String[] line; 
-    while (scan.hasNextLine() == true){
+    String[] line;
+    while (scan.hasNextLine() == true) {
       line = scan.nextLine().split(",");
       tempBits = line[0];
       tempValue = line[1];
       set(tempBits, tempValue);
-    } // while 
+    } // while
     scan.close();
   } // load(InputStream)
 } // BitTree class

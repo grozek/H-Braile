@@ -1,3 +1,19 @@
+/**
+ * Gabriela Roznawska
+ * CSC207
+ * 12/15/2023
+ *
+ * Provides methods that translate:
+ * - ASCII character to a string of bits representing Braile character
+ * - String of bits representing Braile character to a ASCII character
+ * - String of bits representing a braile character to unicode braile character
+ * 
+ * Used Java documentation for Scanner, Character, Integer
+ * Character Array, String.
+ * Furthermore I used generous help of prof. Rebelsky
+ */
+
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
